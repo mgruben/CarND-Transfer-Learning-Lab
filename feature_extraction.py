@@ -46,14 +46,24 @@ def main(_):
 
     print(X_train.shape, y_train.shape)
     print(X_val.shape, y_val.shape)
-
+    
+    # dynamically set number of classes for cifar10 and gtsrb
+    nb_classes = len(np.unique(y_train))
+    
     # TODO: define your model and hyperparams here
     # make sure to adjust the number of classes based on
     # the dataset
     # 10 for cifar10
     # 43 for traffic
+    inp = Input(shape=input_shape)
+    x = Flatten()(inp)
+    x = Dense(nb_classes, activation='softmax')(x)
+    model = Model(inp, x)
+    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
 
     # TODO: train your model here
+    model.fit(X_train, y_train, nb_epoch=FLAGS.epochs, batch_size=FLAGS.batch_size, validation_data=(X_val, y_val), shuffle=True)
 
 
 # parses flags and calls the `main` function above
