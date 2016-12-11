@@ -12,6 +12,8 @@ FLAGS = flags.FLAGS
 # command line flags
 flags.DEFINE_string('training_file', '', "Bottleneck features training file (.p)")
 flags.DEFINE_string('validation_file', '', "Bottleneck features validation file (.p)")
+flags.DEFINE_integer('epochs', 50, "The number of epochs.")
+flags.DEFINE_integer('batch_size', 256, "The batch size.")
 
 
 def load_bottleneck_data(training_file, validation_file):
