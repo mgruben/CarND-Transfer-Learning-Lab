@@ -55,7 +55,7 @@ def main(_):
     # the dataset
     # 10 for cifar10
     # 43 for traffic
-    inp = Input(shape=input_shape)
+    inp = Input(shape=X_train.shape[1:])
     x = Flatten()(inp)
     x = Dense(nb_classes, activation='softmax')(x)
     model = Model(inp, x)
